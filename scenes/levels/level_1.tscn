@@ -26,9 +26,6 @@ volumetric_fog_density = 0.02
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_on3t5")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.34747, 35.2659)
-
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_f2mm8")
 data = {
