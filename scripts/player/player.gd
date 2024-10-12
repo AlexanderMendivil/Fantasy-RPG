@@ -1,28 +1,47 @@
 extends CharacterBody3D
 
 
-@export var speed = 5.0
-@export var jump_velocity = 4.5
+@export var gravity: float = 9.8
+@export var jump_force: int = 9
+@export var walk_speed: int = 3
+@export var run_speed: int = 10
 
+var direction: Vector3 
+var horizontal_velocity: Vector3 
+var aim_turn: float
+var movement: float
+var vertical_velocity: Vector3 
+var movement_speed: int 
+var angular_acceleration: int 
+var acceleration: int 
+var just_hit: bool
 
+@onready var camrot_h = %h
+
+func _ready() -> void:
+	pass
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		aim_turn += -event.relative.x * 0.015	
+
+	if event.is_action_pressed('AIM'):
+		direction = camrot_h.global_transform.basis.z
+		
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	pass
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
 
-	move_and_slide()
+class AnimationState:
+	static var IDLE: String = 'idle'
+	static var WALK: String = 'walk'
+	static var JUMP: String = 'jump'
+	static var RUN: String = 'run'
+	static var ATTACK1: String = 'attack1'
+	static var DEATH: String = 'death'
+
+	static var IS_ATTACKING: bool = false
+	static var IS_WALKING: bool = false
+	static var IS_JUMPING: bool = false
+	static var IS_DYING: bool = false
