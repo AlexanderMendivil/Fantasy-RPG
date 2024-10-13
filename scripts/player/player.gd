@@ -29,7 +29,24 @@ func _input(event: InputEvent) -> void:
 		direction = camrot_h.global_transform.basis.z
 		
 func _physics_process(delta: float) -> void:
-	pass
+	var on_floor = is_on_floor()
+
+	if !AnimationState.IS_DYING:
+		if is_on_floor():
+			vertical_velocity = Vector3.ZERO * gravity * 10
+		else:
+			vertical_velocity += Vector3.DOWN * gravity * 2 * delta
+		
+		if Input.is_action_pressed('JUNMP') and !AnimationState.IS_ATTACKING and is_on_floor():
+			vertical_velocity = Vector3.UP * jump_force
+			angular_acceleration = 10
+			movement_speed = 0
+			acceleration = 15
+			
+			AnimationState.IS_JUMPING = true
+			
+
+
 
 
 
