@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var player_mesh = %Knight
+@onready var player_mesh: Node3D = %Knight
 
 @export var gravity: float = 9.8
 @export var jump_force: int = 9
@@ -17,7 +17,9 @@ var angular_acceleration: int = 10
 var acceleration: int
 var just_hit: bool
 
-@onready var camrot_h = %h
+@onready var camrot_h: Node3D = %h
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback = animation_tree.get("parameters/playback")
 
 func _ready() -> void:
 	pass
@@ -31,6 +33,7 @@ func _input(event: InputEvent) -> void:
 		
 func _physics_process(delta: float) -> void:
 	if !AnimationState.IS_DYING:
+		attack()
 		if is_on_floor():
 			vertical_velocity = Vector3.DOWN * gravity/10
 		else:
@@ -42,6 +45,11 @@ func _physics_process(delta: float) -> void:
 			movement_speed = 0
 			acceleration = 15			
 		
+		if AnimationState.ATTACK1 in playback.get_current_node():
+			AnimationState.IS_ATTACKING = true			
+		else:
+			AnimationState.IS_ATTACKING = false
+
 		var h_rot = camrot_h.global_transform.basis.get_euler().y
 		if Input.is_action_pressed('FORWARD') or Input.is_action_pressed('BACKWARD') or Input.is_action_pressed('LEFT') or Input.is_action_pressed('RIGHT'):
 			AnimationState.IS_WALKING = true
@@ -77,16 +85,28 @@ func _physics_process(delta: float) -> void:
 		velocity.x = horizontal_velocity.x + vertical_velocity.x
 		velocity.y = vertical_velocity.y
 		move_and_slide()
+		animation_tree["parameters/conditions/isOnFloor"] = is_on_floor()
+		animation_tree["parameters/conditions/isInAir"] = !is_on_floor()
+		animation_tree["parameters/conditions/isWalking"] = AnimationState.IS_WALKING
+		animation_tree["parameters/conditions/isNotWalking"] = !AnimationState.IS_WALKING
+		animation_tree["parameters/conditions/isRunning"] = AnimationState.IS_RUNNING
+		animation_tree["parameters/conditions/isNotRunning"] = !AnimationState.IS_RUNNING
+		animation_tree["parameters/conditions/isDying"] = AnimationState.IS_DYING
 
+func attack():
+	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()):
+		if Input.is_action_just_pressed("ATTACK"):
+			if !AnimationState.IS_ATTACKING:
+				playback.travel(AnimationState.ATTACK1)
 
 				
 class AnimationState:
 	static var IDLE: String = 'idle'
-	static var WALK: String = 'walk'
-	static var JUMP: String = 'jump'
-	static var RUN: String = 'run'
+	static var WALK: String = 'Walking_A'
+	static var JUMP: String = 'Jump_Full_Long'
+	static var RUN: String = 'Running_A'
 	static var ATTACK1: String = 'attack1'
-	static var DEATH: String = 'death'
+	static var DEATH: String = 'Death_A'
 
 	static var IS_ATTACKING: bool = false
 	static var IS_WALKING: bool = false
