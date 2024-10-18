@@ -61,6 +61,7 @@ func _physics_process(delta: float) -> void:
 				movement_speed = run_speed
 			else:
 				AnimationState.IS_WALKING = true		
+				AnimationState.IS_RUNNING = false
 				movement_speed = walk_speed
 		else:
 			AnimationState.IS_WALKING = false
@@ -95,7 +96,7 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()):
-		if Input.is_action_just_pressed("ATTACK"):
+		if Input.is_action_pressed("ATTACK"):
 			if !AnimationState.IS_ATTACKING:
 				playback.travel(AnimationState.ATTACK1)
 
@@ -105,7 +106,7 @@ class AnimationState:
 	static var WALK: String = 'Walking_A'
 	static var JUMP: String = 'Jump_Full_Long'
 	static var RUN: String = 'Running_A'
-	static var ATTACK1: String = 'attack1'
+	static var ATTACK1: String = 'Attack1'
 	static var DEATH: String = 'Death_A'
 
 	static var IS_ATTACKING: bool = false
