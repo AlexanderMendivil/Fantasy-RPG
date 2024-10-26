@@ -1,4 +1,6 @@
 extends CharacterBody3D
+const AnimationState = preload("res://utils/animation_state.gd").AnimationState
+const InputMapAction = preload("res://utils/input_map_actions.gd").InputMapAction 
 
 @onready var player_mesh: Node3D = %Knight
 
@@ -28,7 +30,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		aim_turn += -event.relative.x * 0.015
 
-	if event.is_action_pressed('AIM'):
+	if event.is_action_pressed(InputMapAction.AIM):
 		direction = camrot_h.global_transform.basis.z
 		
 func _physics_process(delta: float) -> void:
@@ -39,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			vertical_velocity += Vector3.DOWN * gravity * 2 * delta
 		
-		if Input.is_action_pressed('JUMP') and !AnimationState.IS_ATTACKING and is_on_floor():			
+		if Input.is_action_pressed(InputMapAction.JUMP) and !AnimationState.IS_ATTACKING and is_on_floor():			
 			AnimationState.IS_JUMPING = true
 			vertical_velocity = Vector3.UP * jump_force			
 			movement_speed = 0
@@ -51,12 +53,12 @@ func _physics_process(delta: float) -> void:
 			AnimationState.IS_ATTACKING = false
 
 		var h_rot = camrot_h.global_transform.basis.get_euler().y
-		if Input.is_action_pressed('FORWARD') or Input.is_action_pressed('BACKWARD') or Input.is_action_pressed('LEFT') or Input.is_action_pressed('RIGHT'):
+		if Input.is_action_pressed(InputMapAction.FORWARD) or Input.is_action_pressed(InputMapAction.BACKWARD) or Input.is_action_pressed(InputMapAction.LEFT) or Input.is_action_pressed(InputMapAction.RIGHT):
 			AnimationState.IS_WALKING = true
 			acceleration = 5
-			direction = Vector3(Input.get_action_strength("LEFT") - Input.get_action_strength("RIGHT"), 0, Input.get_action_strength("FORWARD") - Input.get_action_strength("BACKWARD"))
+			direction = Vector3(Input.get_action_strength(InputMapAction.LEFT) - Input.get_action_strength(InputMapAction.RIGHT), 0, Input.get_action_strength(InputMapAction.FORWARD) - Input.get_action_strength(InputMapAction.BACKWARD))
 			direction = direction.rotated(Vector3.UP, h_rot).normalized()
-			if Input.is_action_pressed('RUN'):
+			if Input.is_action_pressed(InputMapAction.RUN):
 				AnimationState.IS_RUNNING = true
 				movement_speed = run_speed
 			else:
@@ -72,7 +74,7 @@ func _physics_process(delta: float) -> void:
 			horizontal_velocity = Vector3.ZERO
 			vertical_velocity = Vector3.ZERO
 			
-		if Input.is_action_pressed("AIM"):			
+		if Input.is_action_pressed(InputMapAction.AIM):			
 			player_mesh.rotation.y = lerp_angle(player_mesh.rotation.y, camrot_h.rotation.y, delta*angular_acceleration)			
 		else:
 			player_mesh.rotation.y = lerp_angle(player_mesh.rotation.y, atan2(direction.x, direction.z) - rotation.y, delta*angular_acceleration)
@@ -96,21 +98,8 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()):
-		if Input.is_action_pressed("ATTACK"):
+		if Input.is_action_pressed(InputMapAction.ATTACK):
 			if !AnimationState.IS_ATTACKING:
 				playback.travel(AnimationState.ATTACK1)
 
 				
-class AnimationState:
-	static var IDLE: String = 'idle'
-	static var WALK: String = 'Walking_A'
-	static var JUMP: String = 'Jump_Full_Long'
-	static var RUN: String = 'Running_A'
-	static var ATTACK1: String = 'Attack1'
-	static var DEATH: String = 'Death_A'
-
-	static var IS_ATTACKING: bool = false
-	static var IS_WALKING: bool = false
-	static var IS_JUMPING: bool = false
-	static var IS_DYING: bool = false
-	static var IS_RUNNING: bool = false
