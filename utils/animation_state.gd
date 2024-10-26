@@ -1,6 +1,6 @@
 				
 class AnimationState:
-	static var IDLE: String = 'idle'
+	static var IDLE: String = 'Idle'
 	static var WALK: String = 'Walking_A'
 	static var JUMP: String = 'Jump_Full_Long'
 	static var RUN: String = 'Running_A'

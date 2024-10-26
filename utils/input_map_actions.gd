@@ -7,3 +7,4 @@ class InputMapAction:
     static var RUN: String = "RUN"
     static var AIM: String = "AIM"
     static var ATTACK: String = "ATTACK"
+    static var ESC: String = "ESC"

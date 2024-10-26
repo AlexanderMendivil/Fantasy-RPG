@@ -1,5 +1,5 @@
 extends Node3D
-
+const InputMapAction = preload("res://utils/input_map_actions.gd").InputMapAction 
 
 @onready var h_node: Node3D = %h 
 @onready var v_node: SpringArm3D = %v
@@ -18,6 +18,12 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func  _input(event: InputEvent) -> void:
+	if event.is_action_pressed(InputMapAction.ESC):		
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 	if event is InputEventMouseMotion:
 		cam_root_h += -event.relative.x * h_sensitivity
 		cam_root_v += event.relative.y * v_sensitivity

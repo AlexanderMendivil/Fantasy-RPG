@@ -27,6 +27,7 @@ func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
+	
 	if event is InputEventMouseMotion:
 		aim_turn += -event.relative.x * 0.015
 
@@ -96,8 +97,8 @@ func _physics_process(delta: float) -> void:
 		animation_tree["parameters/conditions/isNotRunning"] = !AnimationState.IS_RUNNING
 		animation_tree["parameters/conditions/isDying"] = AnimationState.IS_DYING
 
-func attack():
-	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()):
+func attack():	
+	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()):		
 		if Input.is_action_pressed(InputMapAction.ATTACK):
 			if !AnimationState.IS_ATTACKING:
 				playback.travel(AnimationState.ATTACK1)
