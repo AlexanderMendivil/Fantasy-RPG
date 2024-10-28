@@ -1,11 +1,19 @@
 extends Node
 
+var states = {
+	"Idle": preload("res://scripts/monster/states_machine/idle_state.gd"),
+	"Attack": preload("res://scripts/monster/states_machine/attack_state.gd"),
+	"Death": preload("res://scripts/monster/states_machine/death_state.gd"),
+	"Run": preload("res://scripts/monster/states_machine/run_state.gd"),
+}
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
+func change_state(state_name: String) -> void:
+	if get_child_count() != 0:
+		if !("Death" in get_child(0).name):
+			get_child(0).queue_free()	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	if states.has(state_name):	
+		var state_temp = states[state_name].new()
+		state_temp.name = state_name
+		add_child(state_temp)
