@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cj82f6wytiyev"]
+[gd_scene load_steps=7 format=3 uid="uid://cj82f6wytiyev"]
 
 [ext_resource type="MeshLibrary" uid="uid://eaoqqmx6s0jv" path="res://scenes/levels/library.tres" id="1_f2mm8"]
 [ext_resource type="PackedScene" uid="uid://wf2dxet77784" path="res://scenes/player/player.tscn" id="2_nvxp6"]
+[ext_resource type="PackedScene" uid="uid://bbc2c4hodxnr0" path="res://scenes/monster/skeleton_warrior_monster.tscn" id="3_3xy8d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a3dyy"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -33,4 +34,8 @@ data = {
 }
 
 [node name="Player" parent="." instance=ExtResource("2_nvxp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27976, 0)
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, 27, 1.27976, 0)
+
+[node name="skeleton_warrior_monster" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_3xy8d")]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -12, 1.68294, 0)
+player = NodePath("../Player")

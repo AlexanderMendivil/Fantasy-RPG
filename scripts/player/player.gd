@@ -1,3 +1,5 @@
+class_name Player
+
 extends CharacterBody3D
 const AnimationState = preload("res://utils/animation_state.gd").AnimationState
 const InputMapAction = preload("res://utils/input_map_actions.gd").InputMapAction 

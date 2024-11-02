@@ -1,11 +1,17 @@
 extends Node
+var StateController
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	StateController = get_parent().get_parent()
+	if StateController.is_awake:
+		await StateController.get_node("AnimationTree").animation_finished
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	StateController.is_attacking = true
+	StateController.get_node("AnimationTree").get("parameters/playback").travel("2H_Melee_Attack_Slice")
+	# StateController.look_at(StateController.player.global_transform.origin, StateController.direction, Vector3.UP)
+	StateController.look_at(StateController.player.global_transform.origin)
+	
+func _physics_process(_delta: float) -> void:
+	if StateController:
+		StateController.velocity.x = 0
+		StateController.velocity.z = 0

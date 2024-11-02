@@ -1,11 +1,28 @@
 extends Node
+var StateController
 
+var is_running: bool
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	StateController = get_parent().get_parent()
+	if StateController.is_attacking:
+		await StateController.get_node("AnimationTree").animation_finished
+		StateController.is_attacking = false
+	else:
+		is_running = false
+		StateController.get_node("AnimationTree").get("parameters/playback").travel("Skeletons_Awaken_Standing")
+		StateController.is_awake = true
+		await StateController.get_node("AnimationTree").animation_finished
 
+	is_running = true
+	StateController.is_awake = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	if is_running:
+		StateController.get_node("AnimationTree").get("parameters/playback").travel("Running_A")
+	
+func _physics_process(delta: float) -> void:
+	if StateController and is_running:
+		StateController.velocity.x += StateController.speed * delta
+		StateController.velocity.z += StateController.speed * delta
+		# StateController.look_at(StateController.player.global_transform.origin, StateController.direction, Vector3.UP)
+		StateController.look_at(StateController.player.global_transform.origin)

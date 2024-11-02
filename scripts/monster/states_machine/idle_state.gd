@@ -6,9 +6,9 @@ func _ready() -> void:
 	if StateController.is_awake:
 		await StateController.get_node("AnimationTree").animation_finished
 
-	StateController.get_node("AnimationTree").get("parameters/playback").travel("Sit_Floor_Idle")
+	StateController.get_node("AnimationTree").get("parameters/playback").travel("Idle")
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if StateController:
 		StateController.velocity.x = 0
 		StateController.velocity.z = 0
