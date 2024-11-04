@@ -22,7 +22,6 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if StateController and is_running:
-		StateController.velocity.x += StateController.speed * delta
-		StateController.velocity.z += StateController.speed * delta
-		# StateController.look_at(StateController.player.global_transform.origin, StateController.direction, Vector3.UP)
-		StateController.look_at(StateController.player.global_transform.origin)
+		StateController.velocity.x = StateController.direction.x * StateController.speed * delta 
+		StateController.velocity.z = StateController.direction.z * StateController.speed * delta 		
+		StateController.look_at(StateController.player.global_position, Vector3.UP)

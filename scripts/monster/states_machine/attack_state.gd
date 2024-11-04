@@ -7,9 +7,8 @@ func _ready() -> void:
 		await StateController.get_node("AnimationTree").animation_finished
 
 	StateController.is_attacking = true
-	StateController.get_node("AnimationTree").get("parameters/playback").travel("2H_Melee_Attack_Slice")
-	# StateController.look_at(StateController.player.global_transform.origin, StateController.direction, Vector3.UP)
-	StateController.look_at(StateController.player.global_transform.origin)
+	StateController.get_node("AnimationTree").get("parameters/playback").travel("2H_Melee_Attack_Slice")	
+	StateController.look_at(-StateController.player.global_transform.origin)
 	
 func _physics_process(_delta: float) -> void:
 	if StateController:

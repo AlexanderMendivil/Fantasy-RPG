@@ -5,7 +5,7 @@ extends CharacterBody3D
 
 @export var player: CharacterBody3D
 
-const speed: float = 1.0
+const speed: float = 200.0
 var direction: Vector3
 var is_awake: bool = false
 var is_attacking: bool = false
@@ -13,6 +13,7 @@ var health: int = 4
 var damage: int = 2
 var is_dying: bool = false
 var just_hit: bool = false
+@onready var chase_player_section: Area3D = $chase_player_section
 
 func _ready() -> void:
 	state_controller.change_state("Idle")
@@ -29,22 +30,35 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_chase_player_section_body_entered(body: Node3D) -> void:
-	if body.name == "Player":
-		print(body.name)
+	if body.name == "Player" and !is_dying:		
 		state_controller.change_state("Run")
 
 
 func _on_attack_player_section_body_entered(body: Node3D) -> void:
-	if body.name == "Player":
-		print(body.name)
+	if body.name == "Player" and !is_dying:		
 		state_controller.change_state("Attack")
 
 
 func _on_chase_player_section_body_exited(body: Node3D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and !is_dying:
 		state_controller.change_state("Idle")
 
 
 func _on_attack_player_section_body_exited(body: Node3D) -> void:
-	if body.name == "Player":
+	if body.name == "Player" and !is_dying:
 		state_controller.change_state("Run")
+
+func _on_animation_tree_animation_finished(anim_name:StringName) -> void:	
+	if "Skeletons_Awaken_Standing"  in anim_name:
+		is_awake = false
+	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):
+		state_controller.change_state("Attack")	
+	elif "Running_A" in anim_name:
+		state_controller.change_state("Idle")
+	elif "Death" in anim_name:
+		death()
+
+
+func death() -> void:		
+	queue_free()
+
