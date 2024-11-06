@@ -23,14 +23,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if player:
-		direction = (player.global_transform.origin - global_transform.origin).normalized()
-
-	
+	_player_position()	
 	move_and_slide()
 
+
+func _player_position() -> void:
+	if player:		
+		direction = (player.global_transform.origin - global_transform.origin).normalized()
+
 func _on_chase_player_section_body_entered(body: Node3D) -> void:
-	if body.name == "Player" and !is_dying:		
+	if body.name == "Player" and !is_dying:				
 		state_controller.change_state("Run")
 
 
@@ -40,7 +42,7 @@ func _on_attack_player_section_body_entered(body: Node3D) -> void:
 
 
 func _on_chase_player_section_body_exited(body: Node3D) -> void:
-	if body.name == "Player" and !is_dying:
+	if body.name == "Player" and !is_dying:		
 		state_controller.change_state("Idle")
 
 
@@ -52,9 +54,7 @@ func _on_animation_tree_animation_finished(anim_name:StringName) -> void:
 	if "Skeletons_Awaken_Standing"  in anim_name:
 		is_awake = false
 	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):
-		state_controller.change_state("Attack")	
-	elif "Running_A" in anim_name:
-		state_controller.change_state("Idle")
+		state_controller.change_state("Attack")		
 	elif "Death" in anim_name:
 		death()
 
