@@ -106,3 +106,8 @@ func attack():
 				playback.travel(AnimationState.ATTACK1)
 
 				
+
+
+func _on_collision_sword_area_body_entered(body:Node3D) -> void:
+	if(body.is_in_group("monster")):
+		body.health -= 1

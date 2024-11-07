@@ -9,7 +9,12 @@ const speed: float = 200.0
 var direction: Vector3
 var is_awake: bool = false
 var is_attacking: bool = false
-var health: int = 4
+var health: int = 4:
+	set(value):
+		if(value <= 0):
+			state_controller.change_state("Death")
+		health = value
+
 var damage: int = 2
 var is_dying: bool = false
 var just_hit: bool = false
