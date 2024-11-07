@@ -109,5 +109,5 @@ func attack():
 
 
 func _on_collision_sword_area_body_entered(body:Node3D) -> void:
-	if(body.is_in_group("monster")):
+	if(body.is_in_group("monster") && AnimationState.IS_ATTACKING):		
 		body.health -= 1
