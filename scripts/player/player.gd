@@ -7,6 +7,14 @@ const InputMapAction = preload("res://utils/input_map_actions.gd").InputMapActio
 @onready var player_mesh: Node3D = %Knight
 
 @export var gravity: float = 9.8
+@export var damage: float = 2
+@export var health: float = 10:
+	set(value):
+		if value <= 0:
+			AnimationState.IS_DYING = true
+			return
+		health = value
+
 @export var jump_force: int = 9
 @export var walk_speed: int = 3
 @export var run_speed: int = 10
@@ -98,6 +106,10 @@ func _physics_process(delta: float) -> void:
 		animation_tree["parameters/conditions/isRunning"] = AnimationState.IS_RUNNING
 		animation_tree["parameters/conditions/isNotRunning"] = !AnimationState.IS_RUNNING
 		animation_tree["parameters/conditions/isDying"] = AnimationState.IS_DYING
+	
+	else:
+	# player died
+		_on_player_dispose()
 
 func attack():	
 	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()):		
@@ -107,7 +119,9 @@ func attack():
 
 				
 
+func _on_player_dispose() -> void:	
+	playback.travel(AnimationState.DEATH)
 
 func _on_collision_sword_area_body_entered(body:Node3D) -> void:
 	if(body.is_in_group("monster") && AnimationState.IS_ATTACKING):		
-		body.health -= 1
+		body.health -= damage

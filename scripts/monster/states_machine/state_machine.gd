@@ -5,6 +5,7 @@ var states = {
 	"Attack": preload("res://scripts/monster/states_machine/attack_state.gd"),
 	"Death": preload("res://scripts/monster/states_machine/death_state.gd"),
 	"Run": preload("res://scripts/monster/states_machine/run_state.gd"),
+	"Cheer": preload("res://scripts/monster/states_machine/cheer_state.gd"),
 }
 
 

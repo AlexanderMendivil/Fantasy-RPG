@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+const PlayerAnimationState = preload("res://utils/animation_state.gd").AnimationState
 
 @onready var state_controller = $StateMachine
 
@@ -13,6 +13,7 @@ var health: int = 4:
 	set(value):
 		if(value <= 0):
 			state_controller.change_state("Death")
+			return
 		health = value
 
 var damage: int = 2
@@ -58,12 +59,19 @@ func _on_attack_player_section_body_exited(body: Node3D) -> void:
 func _on_animation_tree_animation_finished(anim_name:StringName) -> void:	
 	if "Skeletons_Awaken_Standing"  in anim_name:
 		is_awake = false
-	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):
+	elif ("2H_Melee_Attack_Slice" in anim_name) and PlayerAnimationState.IS_DYING:				
+		state_controller.change_state("Cheer")
+	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):		
+		print("Attack")
+		print(PlayerAnimationState.IS_DYING)
 		state_controller.change_state("Attack")		
 	elif "Death" in anim_name:
 		death()
 
+func _on_area_3d_body_entered(body:Node3D) -> void:
+	if body.name == "Player" and !is_dying and is_attacking:		
+		body.health -= damage
+		just_hit = true
 
 func death() -> void:		
 	queue_free()
-
