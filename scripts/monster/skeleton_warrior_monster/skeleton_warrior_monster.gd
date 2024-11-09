@@ -4,7 +4,7 @@ const PlayerAnimationState = preload("res://utils/animation_state.gd").Animation
 @onready var state_controller = $StateMachine
 
 @export var player: CharacterBody3D
-
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
 const speed: float = 200.0
 var direction: Vector3
 var is_awake: bool = false
@@ -21,7 +21,7 @@ var is_dying: bool = false
 var just_hit: bool = false
 @onready var chase_player_section: Area3D = $chase_player_section
 
-func _ready() -> void:
+func _ready() -> void:	
 	state_controller.change_state("Idle")
 
 func _physics_process(delta: float) -> void:
@@ -61,17 +61,19 @@ func _on_animation_tree_animation_finished(anim_name:StringName) -> void:
 		is_awake = false
 	elif ("2H_Melee_Attack_Slice" in anim_name) and PlayerAnimationState.IS_DYING:				
 		state_controller.change_state("Cheer")
-	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):		
-		print("Attack")
-		print(PlayerAnimationState.IS_DYING)
+	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):				
 		state_controller.change_state("Attack")		
 	elif "Death" in anim_name:
 		death()
 
-func _on_area_3d_body_entered(body:Node3D) -> void:
-	if body.name == "Player" and !is_dying and is_attacking:		
+
+func  mid_animation_trigger() -> void:	
+		just_hit = true		
+
+func _on_area_3d_body_entered(body:Node3D) -> void:				
+	if body.name == "Player" and !is_dying and is_attacking and just_hit:				
+		just_hit = false
 		body.health -= damage
-		just_hit = true
 
 func death() -> void:		
 	queue_free()
