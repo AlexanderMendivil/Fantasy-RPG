@@ -4,7 +4,7 @@ const PlayerAnimationState = preload("res://utils/animation_state.gd").Animation
 @onready var state_controller = $StateMachine
 
 @export var player: CharacterBody3D
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+
 const speed: float = 200.0
 var direction: Vector3
 var is_awake: bool = false
