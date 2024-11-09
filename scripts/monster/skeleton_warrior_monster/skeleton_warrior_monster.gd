@@ -11,6 +11,10 @@ var is_awake: bool = false
 var is_attacking: bool = false
 var health: int = 4:
 	set(value):
+		var tween = create_tween()		
+		tween.tween_property(self, "global_position", global_position - (direction/1.5), 0.2)							
+		await tween.finished
+		tween.kill()
 		if(value <= 0):
 			state_controller.change_state("Death")
 			return
