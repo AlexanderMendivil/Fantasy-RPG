@@ -1066,74 +1066,45 @@ cache/0/15/0/glyphs/41/size = Vector2(9, 12)
 cache/0/15/0/glyphs/41/uv_rect = Rect2(103, 30, 9, 12)
 cache/0/15/0/glyphs/41/texture_idx = 0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7ofw"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rj5ox"]
+texture = ExtResource("1_y00g2")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 13.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(636, 85, 119, 25)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmapt"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(1, 1, 1, 0.75)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3c07m"]
+texture = ExtResource("1_y00g2")
+texture_margin_left = 39.0
+texture_margin_top = 10.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(636, 25, 119, 25)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2v25"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.225, 0.225, 0.225, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j6n87"]
+texture = ExtResource("1_y00g2")
+texture_margin_left = 39.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+region_rect = Rect2(634, 53, 122, 28)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd4r6"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0x3kc"]
+texture = ExtResource("1_y00g2")
+texture_margin_left = 39.0
+texture_margin_top = 10.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(636, 25, 119, 25)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hjuk"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nsg8g"]
+texture = ExtResource("1_y00g2")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 13.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(636, 85, 119, 25)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tditg"]
 texture = ExtResource("1_y00g2")
@@ -1188,11 +1159,11 @@ Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 16
 Button/fonts/font = SubResource("FontFile_sulom")
-Button/styles/disabled = SubResource("StyleBoxFlat_r7ofw")
-Button/styles/focus = SubResource("StyleBoxFlat_cmapt")
-Button/styles/hover = SubResource("StyleBoxFlat_c2v25")
-Button/styles/normal = SubResource("StyleBoxFlat_xd4r6")
-Button/styles/pressed = SubResource("StyleBoxFlat_8hjuk")
+Button/styles/disabled = SubResource("StyleBoxTexture_rj5ox")
+Button/styles/focus = SubResource("StyleBoxTexture_3c07m")
+Button/styles/hover = SubResource("StyleBoxTexture_j6n87")
+Button/styles/normal = SubResource("StyleBoxTexture_0x3kc")
+Button/styles/pressed = SubResource("StyleBoxTexture_nsg8g")
 Panel/styles/panel = SubResource("StyleBoxTexture_tditg")
 ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
 ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
