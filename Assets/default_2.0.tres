@@ -1114,29 +1114,15 @@ texture_margin_right = 32.0
 texture_margin_bottom = 31.0
 region_rect = Rect2(446.539, 464.764, 96.0446, 63.67)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5w5u2"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.1, 0.1, 0.1, 0.3)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s0fd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3q6em"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(1, 1, 1, 0.4)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-corner_detail = 6
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_317vt"]
+texture = ExtResource("1_y00g2")
+texture_margin_left = 1.0
+texture_margin_top = 4.0
+texture_margin_right = 1.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(341, 40, 23, 14)
 
 [resource]
 default_font = ExtResource("1_5r6v5")
@@ -1170,5 +1156,5 @@ ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
 ProgressBar/constants/outline_size = 0
 ProgressBar/font_sizes/font_size = 16
 ProgressBar/fonts/font = SubResource("FontFile_sulom")
-ProgressBar/styles/background = SubResource("StyleBoxFlat_5w5u2")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_3q6em")
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_6s0fd")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_317vt")
