@@ -121,7 +121,15 @@ func attack():
 
 func _on_player_dispose() -> void:	
 	playback.travel(AnimationState.DEATH)
+	
+	await get_tree().create_timer(7.0).timeout
+	_reset_player()
 	get_tree().reload_current_scene()
+
+
+func _reset_player()-> void: 
+	health = 10
+	AnimationState.IS_DYING = false
 
 func _on_collision_sword_area_body_entered(body:Node3D) -> void:
 	if(body.is_in_group("monster") && AnimationState.IS_ATTACKING):		

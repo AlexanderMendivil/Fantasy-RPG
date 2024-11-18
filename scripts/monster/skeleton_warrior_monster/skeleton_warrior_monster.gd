@@ -80,4 +80,10 @@ func _on_area_3d_body_entered(body:Node3D) -> void:
 		body.health -= damage
 
 func death() -> void:		
+	_reset_skeleton()
 	queue_free()
+
+func _reset_skeleton() -> void:
+	health = 4
+	is_dying = false
+	state_controller.change_state("Idle")
