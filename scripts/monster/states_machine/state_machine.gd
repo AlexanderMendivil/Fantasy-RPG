@@ -14,7 +14,7 @@ func change_state(state_name: String) -> void:
 		if !("Death" in get_child(0).name):
 			get_child(0).queue_free()	
 
-	if states.has(state_name):	
+	if states.has(state_name):			
 		var state_temp = states[state_name].new()
 		state_temp.name = state_name
 		add_child(state_temp)

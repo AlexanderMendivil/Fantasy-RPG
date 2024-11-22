@@ -28,8 +28,7 @@ var just_hit: bool = false
 func _ready() -> void:	
 	state_controller.change_state("Idle")
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
+func _physics_process(delta: float) -> void:	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -57,7 +56,7 @@ func _on_chase_player_section_body_exited(body: Node3D) -> void:
 
 
 func _on_attack_player_section_body_exited(body: Node3D) -> void:
-	if body.name == "Player" and !is_dying:
+	if body.name == "Player" and !is_dying:		
 		state_controller.change_state("Run")
 
 func _on_animation_tree_animation_finished(anim_name:StringName) -> void:	
