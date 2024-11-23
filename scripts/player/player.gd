@@ -124,7 +124,7 @@ func _on_player_dispose() -> void:
 	
 	await get_tree().create_timer(7.0).timeout
 	_reset_player()
-	get_tree().reload_current_scene()
+	get_node('../game_overlay').show_game_over()	
 
 
 func _reset_player()-> void: 
