@@ -6,18 +6,23 @@ const InputMapAction = preload("res://utils/input_map_actions.gd").InputMapActio
 
 @onready var player_mesh: Node3D = %Knight
 
+signal on_player_health(health: float)
+
 @export var gravity: float = 9.8
 @export var damage: float = 2
 @export var health: float = 10:
 	set(value):
+		on_player_health.emit(value)
 		if value <= 0:
 			AnimationState.IS_DYING = true
 			return
 		health = value
 
+
 @export var jump_force: int = 9
 @export var walk_speed: int = 3
 @export var run_speed: int = 10
+
 
 var direction: Vector3
 var horizontal_velocity: Vector3
@@ -34,7 +39,7 @@ var just_hit: bool
 @onready var playback = animation_tree.get("parameters/playback")
 
 func _ready() -> void:
-	pass
+	on_player_health.emit(health)
 
 func _input(event: InputEvent) -> void:
 	

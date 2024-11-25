@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj82f6wytiyev"]
+[gd_scene load_steps=9 format=3 uid="uid://cj82f6wytiyev"]
 
 [ext_resource type="MeshLibrary" uid="uid://eaoqqmx6s0jv" path="res://scenes/levels/library.tres" id="1_f2mm8"]
 [ext_resource type="PackedScene" uid="uid://wf2dxet77784" path="res://scenes/player/player.tscn" id="2_nvxp6"]
 [ext_resource type="PackedScene" uid="uid://bbc2c4hodxnr0" path="res://scenes/monster/skeleton_warrior_monster.tscn" id="3_3xy8d"]
 [ext_resource type="PackedScene" uid="uid://buf3fnd4y7l1p" path="res://scenes/player/GUI/game_overlay.tscn" id="4_8561s"]
+[ext_resource type="PackedScene" uid="uid://bgq0ddc7fbtqd" path="res://scenes/player/GUI.tscn" id="5_4l2fo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a3dyy"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -42,3 +43,7 @@ transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819
 player = NodePath("../Player")
 
 [node name="game_overlay" parent="." instance=ExtResource("4_8561s")]
+
+[node name="GUI" parent="." instance=ExtResource("5_4l2fo")]
+
+[connection signal="on_player_health" from="Player" to="GUI" method="_on_player_on_player_health"]

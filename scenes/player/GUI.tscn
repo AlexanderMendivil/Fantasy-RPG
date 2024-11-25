@@ -1,10 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgq0ddc7fbtqd"]
+[gd_scene load_steps=3 format=3 uid="uid://bgq0ddc7fbtqd"]
 
 [ext_resource type="Theme" uid="uid://20axr5yoh4qi" path="res://Assets/default_2.0.tres" id="1_3lvci"]
+[ext_resource type="Script" path="res://scenes/player/GUI/gui.gd" id="2_b1xqr"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("2_b1xqr")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 835.0
-offset_bottom = 397.0
+[node name="container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 64.0
+offset_right = 1096.0
+offset_bottom = 544.0
+
+[node name="BG" type="Panel" parent="container"]
+process_mode = 3
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 936.0
+offset_bottom = 464.0
 theme = ExtResource("1_3lvci")
+
+[node name="HP_bar" type="ProgressBar" parent="."]
+process_mode = 3
+offset_left = 16.0
+offset_top = 576.0
+offset_right = 144.0
+offset_bottom = 599.0
+max_value = 10.0
+show_percentage = false
