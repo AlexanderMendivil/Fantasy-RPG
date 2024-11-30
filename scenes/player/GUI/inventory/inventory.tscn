@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d350h6k1kechc"]
+[gd_scene load_steps=2 format=3 uid="uid://d350h6k1kechc"]
 
 [ext_resource type="Script" path="res://scripts/GUI/inventory/inventory_main.gd" id="1_vmqfi"]
-[ext_resource type="Script" path="res://scripts/GUI/inventory/inventory_slot.gd" id="2_1to0s"]
 
 [node name="inventory" type="Control"]
 layout_mode = 3
@@ -16,7 +15,4 @@ offset_left = 128.0
 offset_top = 64.0
 offset_right = 1024.0
 offset_bottom = 504.0
-
-[node name="InventorySlot" type="PanelContainer" parent="GridContainer"]
-layout_mode = 2
-script = ExtResource("2_1to0s")
+columns = 6

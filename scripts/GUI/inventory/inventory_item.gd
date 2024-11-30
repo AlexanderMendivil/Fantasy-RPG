@@ -17,6 +17,23 @@ func _ready() -> void:
 			add_child(label)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func init(d: ItemData) -> void:
+	data = d
+
+
+func _get_drag_data(at_position: Vector2) -> Variant:
+	set_drag_preview(make_drag_preview(at_position))
+	return self
+
+func make_drag_preview(at_position: Vector2) -> Control:
+	var texture_node: TextureRect = TextureRect.new()
+	texture_node.texture = data.item_texture		
+	texture_node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	texture_node.stretch_mode = TextureRect.StretchMode.STRETCH_KEEP_ASPECT_CENTERED 
+	texture_node.custom_minimum_size = self.size
+	texture_node.modulate.a = 0.5
+	texture_node.position = Vector2(-at_position)
+	var control_node: Control = Control.new()
+	control_node.add_child(texture_node)
+
+	return control_node
