@@ -1,5 +1,7 @@
 extends Node
 
+
+signal player_health_changed(health: int)
 var items: Dictionary = {
 	"long sword": preload("res://scenes/player/GUI/inventory/long_sword.tres"),
 	"iron sword": preload("res://scenes/player/GUI/inventory/iron_sword.tres"),
@@ -13,3 +15,13 @@ var body_equipped: ItemData
 var player_damage: int = 0
 var player_defense: int = 0
 
+
+
+func heal_player(heal: int) -> void:
+	if (on_player_health + heal) >= player_health_max:
+		pass
+	else:
+		on_player_health += heal
+		player_health_changed.emit(on_player_health)
+
+		

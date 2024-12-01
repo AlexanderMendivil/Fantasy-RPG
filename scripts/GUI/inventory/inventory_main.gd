@@ -4,7 +4,7 @@ extends Node
 @onready var grid = get_node("GridContainer")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(inventory_size - 1):
+	for i in range(inventory_size):
 		var slot = InventorySlot.new()
 		slot.init(ItemData.ItemType.MAIN, Vector2(32, 32))
 		grid.add_child(slot)
@@ -15,13 +15,14 @@ func _ready() -> void:
 func add_item(item_name: String) -> void:
 	var item = InventoryItem.new()
 	item.init(Game.items[item_name])	
-	
-	if item.data.stackable:
-		for i in range(inventory_size - 1):
-			var grid_child = grid.get_child(i) 
-			if grid_child.get_child_count() > 0:
+			
+	if item.data.stackable:		
+		for i in range(inventory_size):
+			var grid_child = grid.get_child(i) 			
+			if grid_child.get_child_count() > 0:				
 				if item.data ==  grid_child.get_child(0).data:
 					grid_child.get_child(0).data.count += 1
+					print(grid_child.get_child(0).data.count)
 					grid_child.get_child(0).get_child(0).text = grid_child.get_child(0).data.count
 					break
 			else:

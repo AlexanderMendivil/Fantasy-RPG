@@ -18,14 +18,6 @@ enum ItemType {
 @export var item_defense: int
 @export var item_health: int
 @export var stackable: bool
-@export var count: int
+@export var count: int = 0
 @export_multiline var description: String
 @export var item_texture: Texture2D
-
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
