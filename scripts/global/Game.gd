@@ -17,7 +17,7 @@ var player_defense: int = 0
 
 
 
-func heal_player(heal: int) -> void:
+func heal_player(heal: int) -> void:	
 	if (on_player_health + heal) >= player_health_max:
 		pass
 	else:

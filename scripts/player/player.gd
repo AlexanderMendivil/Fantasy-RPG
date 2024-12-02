@@ -40,6 +40,11 @@ var just_hit: bool
 
 func _ready() -> void:
 	on_player_health.emit(health)
+	Game.connect("player_health_changed", _on_player_health_changed)
+
+
+func _on_player_health_changed(signal_health: int) -> void:
+	on_player_health.emit(signal_health)
 
 func _input(event: InputEvent) -> void:
 	
