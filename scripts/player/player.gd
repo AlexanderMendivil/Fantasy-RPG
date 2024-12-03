@@ -11,12 +11,15 @@ signal on_player_health(health: float)
 @export var gravity: float = 9.8
 @export var damage: float = 2
 @export var health: float = 10:
-	set(value):
-		on_player_health.emit(value)
-		if value <= 0:
+	set(value):		
+		health = value			
+		if health > Game.player_health_max:
+			health = Game.player_health_max
+		elif health <= 0:
 			AnimationState.IS_DYING = true
-			return
-		health = value
+			health = 0										
+		
+		on_player_health.emit(value)
 
 
 @export var jump_force: int = 9
@@ -43,8 +46,8 @@ func _ready() -> void:
 	Game.connect("player_health_changed", _on_player_health_changed)
 
 
-func _on_player_health_changed(signal_health: int) -> void:
-	on_player_health.emit(signal_health)
+func _on_player_health_changed(signal_health: int) -> void:	
+	health += signal_health
 
 func _input(event: InputEvent) -> void:
 	

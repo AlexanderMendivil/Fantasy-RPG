@@ -29,15 +29,25 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	data.reparent(self)
 
 func _physics_process(_delta: float) -> void:
-	pass	
+	if get_child_count() > 0:
+		var item = get_child(0)
+		match type:
+			ItemData.ItemType.WEAPON:
+				Game.right_hand_equipped = item.data	
+			ItemData.ItemType.BODY:
+				Game.body_equipped = item.data	
+			_:				
+				Game.body_equipped = load("res://scenes/player/GUI/inventory/default_stats/default_body_armor.tres")	
+				Game.right_hand_equipped = load("res://scenes/player/GUI/inventory/default_stats/default_sword.tres")	
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if (event.button_index == 2) and  (event.button_mask == 0):
 			if get_child_count() > 0:
 				if get_child(0).data.item_type == ItemData.ItemType.MISC:
-					Game.heal_player(get_child(0).data.item_health)
-					get_child(0).data.count -= 1
-					get_child(0).get_child(0).text = str(get_child(0).data.count)
-					if get_child(0).data.count == 0:
-						get_child(0).queue_free()
+					var isHeal = Game.heal_player(get_child(0).data.item_health)
+					if isHeal:
+						get_child(0).data.count -= 1
+						get_child(0).get_child(0).text = str(get_child(0).data.count)
+						if get_child(0).data.count == 0:
+							get_child(0).queue_free()
