@@ -69,5 +69,15 @@ offset_bottom = 599.0
 max_value = 10.0
 show_percentage = false
 
+[node name="stamina_bar" type="ProgressBar" parent="."]
+process_mode = 3
+modulate = Color(0.0784314, 0.933333, 0.113725, 1)
+offset_left = 191.0
+offset_top = 576.0
+offset_right = 319.0
+offset_bottom = 599.0
+value = 100.0
+show_percentage = false
+
 [connection signal="pressed" from="container/VBoxContainer/inventory_button" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="container/VBoxContainer/profile_button" to="." method="_on_profile_button_pressed"]

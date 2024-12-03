@@ -39,3 +39,10 @@ func _on_inventory_button_pressed() -> void:
 	get_node("container/VBoxContainer/profile_button").disabled = true
 	get_node("container/inventory").hide()
 	get_node("container/profile").show()
+
+
+func _on_player_on_player_stamina(stamina:float) -> void:
+	if stamina <= 0:
+		get_node("stamina_bar").value = 0
+	else:
+		get_node("stamina_bar").value = stamina

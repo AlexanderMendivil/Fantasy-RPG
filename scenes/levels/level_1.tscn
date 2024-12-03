@@ -47,3 +47,4 @@ player = NodePath("../Player")
 [node name="GUI" parent="." instance=ExtResource("5_4l2fo")]
 
 [connection signal="on_player_health" from="Player" to="GUI" method="_on_player_on_player_health"]
+[connection signal="on_player_stamina" from="Player" to="GUI" method="_on_player_on_player_stamina"]

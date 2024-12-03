@@ -10,6 +10,8 @@ var items: Dictionary = {
 var gold: int = 100	
 var on_player_health: int = 10 
 var player_health_max: int = 10
+var player_stamina_max: float = 100
+var player_stamina__pasive_increase: float = 20
 var right_hand_equipped: ItemData
 var body_equipped: ItemData
 var player_damage: int = 0
