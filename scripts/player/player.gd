@@ -23,15 +23,14 @@ signal on_player_stamina(stamina: float)
 		on_player_health.emit(value)
 
 @export var stamina: float = 100:
-	set(value):
-		stamina = value
+	set(value):		
+		stamina = value		
 		if stamina > Game.player_stamina_max:
 			stamina = Game.player_stamina_max
 		elif stamina <= 0:
-			stamina = 0
-		else: 
-			stamina = value
-		on_player_stamina.emit(value)
+			stamina = 0		
+		on_player_stamina.emit(stamina)		
+				
 		
 @export var jump_force: int = 9
 @export var walk_speed: int = 3
@@ -136,7 +135,7 @@ func _physics_process(delta: float) -> void:
 		_on_player_dispose()
 
 func attack():	
-	if (AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node()) and stamina > 0:		
+	if ((AnimationState.IDLE in playback.get_current_node()) or (AnimationState.WALK in playback.get_current_node()) or (AnimationState.RUN in playback.get_current_node())) and stamina > 0:		
 		if Input.is_action_pressed(InputMapAction.ATTACK):
 			if !AnimationState.IS_ATTACKING:
 				stamina -= Game.player_stamina__pasive_increase
@@ -159,3 +158,11 @@ func _reset_player()-> void:
 func _on_collision_sword_area_body_entered(body:Node3D) -> void:
 	if(body.is_in_group("monster") && AnimationState.IS_ATTACKING):		
 		body.health -= damage
+
+
+func _on_timer_timeout() -> void:
+	print("timer timeout")
+	if stamina < Game.player_stamina_max:
+		print("timer inside")
+		stamina += Game.player_stamina__pasive_increase
+
