@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 			acceleration = 5
 			direction = Vector3(Input.get_action_strength(InputMapAction.LEFT) - Input.get_action_strength(InputMapAction.RIGHT), 0, Input.get_action_strength(InputMapAction.FORWARD) - Input.get_action_strength(InputMapAction.BACKWARD))
 			direction = direction.rotated(Vector3.UP, h_rot).normalized()
-			if Input.is_action_pressed(InputMapAction.RUN):
+			if Input.is_action_pressed(InputMapAction.RUN) && stamina > 0:
 				AnimationState.IS_RUNNING = true
 				movement_speed = run_speed
 			else:
@@ -160,9 +160,11 @@ func _on_collision_sword_area_body_entered(body:Node3D) -> void:
 		body.health -= damage
 
 
-func _on_timer_timeout() -> void:
-	print("timer timeout")
-	if stamina < Game.player_stamina_max:
+func _on_timer_timeout() -> void:	
+	if AnimationState.IS_RUNNING:
+		stamina -= Game.player_stamina__pasive_increase
+		return	
+	elif stamina < Game.player_stamina_max:
 		print("timer inside")
 		stamina += Game.player_stamina__pasive_increase
-
+		return

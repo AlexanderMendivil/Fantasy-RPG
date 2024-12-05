@@ -21,8 +21,7 @@ func add_item(item_name: String) -> void:
 			var grid_child = grid.get_child(i) 			
 			if grid_child.get_child_count() > 0:				
 				if item.data ==  grid_child.get_child(0).data:
-					grid_child.get_child(0).data.count += 1
-					print(grid_child.get_child(0).data.count)
+					grid_child.get_child(0).data.count += 1					
 					grid_child.get_child(0).get_child(0).text = grid_child.get_child(0).data.count
 					break
 			else:

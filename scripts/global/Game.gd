@@ -16,7 +16,10 @@ var right_hand_equipped: ItemData
 var body_equipped: ItemData
 var player_damage: int = 0
 var player_defense: int = 0
-
+var current_xp: int = 0
+var xp_to_next_level: int = 100
+var player_level: int = 1
+var shopping: bool = false
 
 
 func heal_player(heal: int) -> bool:			

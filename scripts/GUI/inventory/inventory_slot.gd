@@ -17,7 +17,7 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 					return true
 				return get_child(0).item_data.type == ItemData.ItemType.MAIN
 		else:
-			return data.data.type == type
+			return data.data.item_type == type
 	
 	return false
 func _drop_data(_at_position: Vector2, data: Variant) -> void:

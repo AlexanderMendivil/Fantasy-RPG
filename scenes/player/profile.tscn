@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6qqddylpqly4"]
+
+[ext_resource type="Script" path="res://scripts/GUI/profile/profile.gd" id="1_vg136"]
+
+[node name="profile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 632.0
+offset_top = 64.0
+offset_right = 672.0
+offset_bottom = 104.0
+script = ExtResource("1_vg136")
+
+[node name="stats_label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "This is a text
+"
