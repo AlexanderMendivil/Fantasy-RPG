@@ -2,6 +2,8 @@ extends Node
 
 
 signal player_health_changed(health: int)
+signal enemy_killed_count()
+
 var items: Dictionary = {
 	"long sword": preload("res://scenes/player/GUI/inventory/long_sword.tres"),
 	"iron sword": preload("res://scenes/player/GUI/inventory/iron_sword.tres"),
@@ -20,7 +22,10 @@ var current_xp: int = 0
 var xp_to_next_level: int = 100
 var player_level: int = 1
 var shopping: bool = false
-var enemies_killed: int = 0
+var enemies_killed: int = 0:
+	set(value):
+		enemies_killed += value
+		enemy_killed_count.emit()
 
 
 func heal_player(heal: int) -> bool:			

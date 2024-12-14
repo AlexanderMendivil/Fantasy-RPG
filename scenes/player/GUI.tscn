@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgq0ddc7fbtqd"]
+[gd_scene load_steps=6 format=3 uid="uid://bgq0ddc7fbtqd"]
 
 [ext_resource type="Theme" uid="uid://20axr5yoh4qi" path="res://Assets/default_2.0.tres" id="1_3lvci"]
 [ext_resource type="Script" path="res://scenes/player/GUI/gui.gd" id="2_b1xqr"]
 [ext_resource type="PackedScene" uid="uid://d350h6k1kechc" path="res://scenes/player/GUI/inventory/inventory.tscn" id="3_0igy4"]
 [ext_resource type="PackedScene" uid="uid://b6qqddylpqly4" path="res://scenes/player/profile.tscn" id="4_gnd2h"]
+[ext_resource type="PackedScene" uid="uid://b5tnuvohpn505" path="res://scenes/player/enemy_stats.tscn" id="5_15bra"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3
@@ -37,6 +38,8 @@ offset_left = 504.0
 offset_top = 135.0
 offset_right = 760.0
 offset_bottom = 255.0
+
+[node name="enemy_stats" parent="container" instance=ExtResource("5_15bra")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="container"]
 layout_mode = 1
@@ -86,3 +89,4 @@ show_percentage = false
 
 [connection signal="pressed" from="container/VBoxContainer/inventory_button" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="container/VBoxContainer/profile_button" to="." method="_on_profile_button_pressed"]
+[connection signal="pressed" from="container/VBoxContainer/enemy_stats" to="." method="_on_enemy_stats_pressed"]

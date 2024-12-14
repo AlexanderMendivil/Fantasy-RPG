@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://b5tnuvohpn505"]
+[gd_scene load_steps=2 format=3 uid="uid://b5tnuvohpn505"]
+
+[ext_resource type="Script" path="res://scripts/GUI/enemy_stats/enemy_stats.gd" id="1_a2mu3"]
 
 [node name="enemy_stats" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ offset_left = 504.0
 offset_top = 128.0
 offset_right = 824.0
 offset_bottom = 384.0
+script = ExtResource("1_a2mu3")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
