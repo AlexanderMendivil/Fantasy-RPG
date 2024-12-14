@@ -34,6 +34,7 @@ func _on_profile_button_pressed() -> void:
 	#get_node("container/VBoxContainer/profile_button").disabled = false
 	get_node("container/inventory").hide()
 	get_node("container/profile").show()
+	get_node("container/enemy_stats").hide()
 
 
 func _on_inventory_button_pressed() -> void:
@@ -41,6 +42,7 @@ func _on_inventory_button_pressed() -> void:
 	#get_node("container/VBoxContainer/profile_button").disabled = true
 	get_node("container/inventory").show()
 	get_node("container/profile").hide()
+	get_node("container/enemy_stats").hide()
 
 
 func _on_player_on_player_stamina(stamina:float) -> void:
@@ -48,3 +50,9 @@ func _on_player_on_player_stamina(stamina:float) -> void:
 		get_node("stamina_bar").value = 0
 	else:
 		get_node("stamina_bar").value = stamina
+
+
+func _on_enemy_stats_pressed() -> void:
+	get_node("container/enemy_stats").show()
+	get_node("container/inventory").hide()
+	get_node("container/profile").hide()

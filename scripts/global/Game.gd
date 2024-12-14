@@ -20,6 +20,7 @@ var current_xp: int = 0
 var xp_to_next_level: int = 100
 var player_level: int = 1
 var shopping: bool = false
+var enemies_killed: int = 0
 
 
 func heal_player(heal: int) -> bool:			

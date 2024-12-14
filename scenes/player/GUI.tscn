@@ -60,6 +60,10 @@ text = "Inventory"
 layout_mode = 2
 text = "Profile"
 
+[node name="enemy_stats" type="Button" parent="container/VBoxContainer"]
+layout_mode = 2
+text = "Enemy stats"
+
 [node name="HP_bar" type="ProgressBar" parent="."]
 process_mode = 3
 offset_left = 16.0

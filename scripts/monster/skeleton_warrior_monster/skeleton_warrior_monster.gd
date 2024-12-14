@@ -5,6 +5,7 @@ const PlayerAnimationState = preload("res://utils/animation_state.gd").Animation
 
 @export var player: CharacterBody3D
 
+
 const speed: float = 200.0
 var direction: Vector3
 var is_awake: bool = false
@@ -17,6 +18,7 @@ var health: int = 4:
 		tween.kill()
 		if(value <= 0):
 			state_controller.change_state("Death")
+			Game.enemies_killed +=1		
 			return
 		health = value
 
