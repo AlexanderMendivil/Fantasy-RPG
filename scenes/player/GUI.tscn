@@ -87,6 +87,12 @@ offset_bottom = 599.0
 value = 100.0
 show_percentage = false
 
+[node name="enemy_stats2" parent="." instance=ExtResource("5_15bra")]
+offset_left = 728.0
+offset_top = 560.0
+offset_right = 1008.0
+offset_bottom = 592.0
+
 [connection signal="pressed" from="container/VBoxContainer/inventory_button" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="container/VBoxContainer/profile_button" to="." method="_on_profile_button_pressed"]
 [connection signal="pressed" from="container/VBoxContainer/enemy_stats" to="." method="_on_enemy_stats_pressed"]

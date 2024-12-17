@@ -5,7 +5,7 @@ const AnimationState = preload("res://utils/animation_state.gd").AnimationState
 const InputMapAction = preload("res://utils/input_map_actions.gd").InputMapAction 
 
 @onready var player_mesh: Node3D = %Knight
-
+@onready var httpRequest: HTTPRequest = $HTTPRequest
 signal on_player_health(health: float)
 signal on_player_stamina(stamina: float)
 
@@ -54,6 +54,8 @@ var just_hit: bool
 func _ready() -> void:
 	on_player_health.emit(health)
 	Game.connect("player_health_changed", _on_player_health_changed)
+
+	httpRequest.request("https://rickandmortyapi.com/api/character/1")
 
 
 func _on_player_health_changed(signal_health: int) -> void:	
@@ -168,3 +170,13 @@ func _on_timer_timeout() -> void:
 		print("timer inside")
 		stamina += Game.player_stamina__pasive_increase
 		return
+
+
+func _on_http_request_request_completed(result:int, response_code:int, headers:PackedStringArray, body:PackedByteArray) -> void:
+		
+	var json = JSON.new()
+	json.parse(body.get_string_from_utf8())
+	print(json.get_data())
+		
+	print(result)
+		
