@@ -26,6 +26,7 @@ var damage: int = 2
 var is_dying: bool = false
 var just_hit: bool = false
 @onready var chase_player_section: Area3D = $chase_player_section
+@onready var attack_player_section: Area3D = $attack_player_section
 
 func _ready() -> void:	
 	state_controller.change_state("Idle")
@@ -66,7 +67,7 @@ func _on_animation_tree_animation_finished(anim_name:StringName) -> void:
 		is_awake = false
 	elif ("2H_Melee_Attack_Slice" in anim_name) and PlayerAnimationState.IS_DYING:				
 		state_controller.change_state("Cheer")
-	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in chase_player_section.get_overlapping_bodies() and !is_dying):				
+	elif ("2H_Melee_Attack_Slice" in anim_name) and (player in attack_player_section.get_overlapping_bodies() and !is_dying):				
 		state_controller.change_state("Attack")		
 	elif "Death" in anim_name:
 		death()
